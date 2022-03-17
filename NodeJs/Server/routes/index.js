@@ -46,31 +46,6 @@ router.get('/dang-xuat', function(req, res, next) {
 
 
 
-
-
-
-
-
-
-
-
-// /* GET home page. */
-// router.get('/', function(req, res, next) {
-//   res.render('index', { title: 'Express' });
-// });
-
-
-
-
-
-
-
-
-
-
-
-
-
 // /* GET san pham page. */
 // router.get('/san-pham', function(req, res, next) {
 //   res.render('index', { title: 'San pham' });
