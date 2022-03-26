@@ -1,15 +1,21 @@
 var express = require('express');
 var router = express.Router();
 
+const productController = require('../components/products/controller');
+const categoryController = require('../components/categories/controller');
+const upload = require('../middle/upload');
+
 /**
  * page: product
  * http://localhost:3000/san-pham
  * method: get
  * detail get list products
  */
-router.get('/', function(req, res, next) {
+router.get('/', async function (req, res, next) {
   //lay danh sach san pham
-  res.render('products',);
+  const products = await productController.getProducts();
+
+  res.render('products', { products: products });
 });
 
 /**
@@ -18,11 +24,31 @@ router.get('/', function(req, res, next) {
  * method: post
  * detail insert new products
  */
-router.post('/', function(req, res, next) {
-//su ly them moi san pham
+router.post('/', [upload.single('image')], async function (req, res, next) {
+  //su ly them moi san pham
+  let { params, body, file } = req;
+  let image = '';
+  if (file) {
+    image = `http://10.82.133.144:3000/images/${file.filename}`;
+  }
 
-  res.render('products',);
+  body = { ...body, image };
+  await productController.insert(body)
+  res.redirect('/san-pham',);
 });
+
+/**
+ * page: product
+ * http://localhost:3000/san-pham
+ * method: get
+ * detail insert new products
+ */
+router.get('/insert', async function (req, res, next) {
+  //su ly them moi san pham
+  const categories = await categoryController.getCategories();
+  res.render('product_insert', { categories: categories });
+});
+
 
 /**
  * page: product
@@ -30,33 +56,47 @@ router.post('/', function(req, res, next) {
  * method: delete
  * detail: delete products
  */
-router.delete('/:id/delete', function(req, res, next) {
+router.delete('/:id/delete', async function (req, res, next) {
   // su ly xoa san pham
-  const {id} = req.params;
+  const { id } = req.params;
+  await productController.delete(id);
+  //tra ve du lieu dang json
+  res.json({ result: true });
+});
 
-    res.render('products',);
-  });
+/**
+* page: product
+* http://localhost:3000/san-pham/:id/edit
+* method: get
+* detail: get on products
+*/
+router.get('/:id/edit', async function (req, res, next) {
+  const { id } = req.params;
+  // xem chi tiet san pham
+  const product = await productController.getById(id);
+  // lay danj sach danh muc
+  const categories = await categoryController.getCategories();
+  res.render('product', { product: product, categories:categories });
+});
+/**
+* page: product
+* http://localhost:3000/san-pham/:id/edit
+* method: post
+* detail: update on products
+*/
+router.post('/:id/edit', [upload.single('image')], async function (req, res, next) {
+  // su ly cap nhat san pham
+  let { params, file, body } = req;
+  delete body.image;
 
-  /**
- * page: product
- * http://localhost:3000/san-pham/:id/edit
- * method: get
- * detail: get on products
- */
-router.get('/:id/edit', function(req, res, next) {
-  // xem chi tiet san pham
-    res.render('products',);
-  });
-    /**
- * page: product
- * http://localhost:3000/san-pham/:id/edit
- * method: put
- * detail: update on products
- */
-router.put('/:id/edit', function(req, res, next) {
-  // xem chi tiet san pham
-    res.render('products',);
-  });
+  if (file) {
+    image = `http://10.82.133.144:3000/images/${file.filename}`;
+    body = { ...body, image };
+  }
+ 
+  await productController.update(params.id, body);
+  res.redirect('/san-pham',);
+});
 
 
 module.exports = router;

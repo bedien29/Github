@@ -5,6 +5,11 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+// const mongoose = require('mongoose');
+require('./components/users/model');
+require('./components/categories/model');
+require('./components/products/model');
+
 // khai bao router
 var indexRouter = require('./routes/index');
 var productRouter = require('./routes/product');
@@ -20,6 +25,16 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+
+// mongoose.connect('xxxxxxxxxxxx', {  
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true
+// })
+// .then(() => console.log('>>>>>>>>>> DB Connected!!!!!!'))
+// .catch(err => console.log('>>>>>>>>> DB Error: ', err));
+
+
 
 //import các router
 app.use('/', indexRouter);
