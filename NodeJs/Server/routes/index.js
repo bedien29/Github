@@ -8,9 +8,6 @@ const userController = require('../components/users/controller');
  * http://localhost:3000/dang-nhap
  * method: get
  */
- router.get('/', function(req, res, next) {
-  res.render('login');
-});
 router.get('/dang-nhap', function(req, res, next) {
   res.render('login');
 });

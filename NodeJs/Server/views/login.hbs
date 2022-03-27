@@ -28,15 +28,15 @@
                             LOGIN FORM
                         </div>
                         <div class="panel-body ">
-                            <form role="form" action="" method="POST">
+                            <form role="form" action="/dang-nhap" method="post">
                                 <div class="form-group ">
                                     <label>User Name</label>
-                                    <input class="form-control" type="text" />
+                                    <input class="form-control" type="email" name="email" placeholder="E-mail" autofocus/>
                                     <p class="help-block">Help text here.</p>
                                 </div>
                                 <div class="form-group">
                                     <label>Password</label>
-                                    <input class="form-control" type="text" />
+                                    <input class="form-control" type="password" name="password" placeholder="Password" value="" />
                                     <p class="help-block">Help text here.</p>
                                 </div>
                                 <button type="submit" class="btn btn-info">Login</button>

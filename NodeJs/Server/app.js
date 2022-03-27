@@ -5,7 +5,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-// const mongoose = require('mongoose');
+const mongoose = require('mongoose');
 require('./components/users/model');
 require('./components/categories/model');
 require('./components/products/model');
@@ -27,12 +27,12 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-// mongoose.connect('xxxxxxxxxxxx', {  
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true
-// })
-// .then(() => console.log('>>>>>>>>>> DB Connected!!!!!!'))
-// .catch(err => console.log('>>>>>>>>> DB Error: ', err));
+mongoose.connect('mongodb+srv://admin:123@cluster0.gtvhv.mongodb.net/Products16302?retryWrites=true&w=majority', {  
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
+.then(() => console.log('>>>>>>>>>> DB Connected!!!!!!'))
+.catch(err => console.log('>>>>>>>>> DB Error: ', err));
 
 
 
