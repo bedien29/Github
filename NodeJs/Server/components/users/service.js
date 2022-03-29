@@ -29,11 +29,11 @@ exports.login = async(email) =>{
 
 
 
-var data =[
-    {  
-    id :1,
-    email:'dien@gmail.com',
-    password: '123456' ,
-    name: ' Dien'
-    }
-]
+// var data =[
+//     {  
+//     id :1,
+//     email:'dien@gmail.com',
+//     password: '123456' ,
+//     name: ' Dien'
+//     }
+// ]

@@ -29,7 +29,7 @@ router.post('/', [upload.single('image')], async function (req, res, next) {
   let { params, body, file } = req;
   let image = '';
   if (file) {
-    image = `http://10.82.133.144:3000/images/${file.filename}`;
+    image = `http://10.82.134.48:3000/images/${file.filename}`;
   }
 
   body = { ...body, image };
@@ -90,7 +90,7 @@ router.post('/:id/edit', [upload.single('image')], async function (req, res, nex
   delete body.image;
 
   if (file) {
-    image = `http://10.82.133.144:3000/images/${file.filename}`;
+    image = `http://10.82.134.48:3000/images/${file.filename}`;
     body = { ...body, image };
   }
  

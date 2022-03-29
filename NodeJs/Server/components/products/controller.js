@@ -24,7 +24,18 @@ exports.getProducts = async () =>{
 }
 
 exports.getById = async(id) =>{
-    const product = await productService.getById(id);
+    // const product = await productService.getById(id);
+    let product = await productService.getById(id);
+    product = {
+        released: date.format(product.released),
+        _id: product._id,
+        name: product.name,
+        price: product.price,
+        quantity: product.quantity,
+        image: product.image,
+        description: product.description,
+        category_id: product.category_id,
+    }
     return product;
 }
 
