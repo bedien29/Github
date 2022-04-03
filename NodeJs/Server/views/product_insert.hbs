@@ -6,20 +6,20 @@
                                     <form role="form" action="/san-pham" method="post" enctype="multipart/form-data">
                                         <div class="form-group">
                                             <label>Name</label>
-                                            <input class="form-control"  type=" text" name="name">
+                                            <input class="form-control" onchange="validation()" id="name" type=" text" name="name">
                                             {{!-- <p class="help-block">Example block-level help text here.</p> --}}
                                         </div>
                                         <div class="form-group">
                                             <label>Price</label>
-                                            <input class="form-control"  type=" number" name="price">
+                                            <input class="form-control" onchange="validation()" id="price" type=" number" name="price">
                                         </div>
                                         <div class="form-group">
                                             <label>Quantity</label>
-                                            <input class="form-control"  type=" number" name="quantity">
+                                            <input class="form-control" onchange="validation()" id="quantity" type=" number" name="quantity">
                                         </div>
                                         <div class="form-group">
                                             <label>Released</label>
-                                            <input class="form-control"  type="date" name="released">
+                                            <input class="form-control" onchange="validation()" id="released" type="date" name="released">
                                         </div>
                                         <div class="form-group">
                                             <label>Image</label>
@@ -32,14 +32,14 @@
                                         </div>
                                         <div class="form-group">
                                             <label>Selects</label>
-                                            <select class="form-control" name="category_id">
+                                            <select class="form-control" name="category_id" id="category_id">
                                                 {{#each categories}}
                                                     <option value="{{this._id}}">{{this.name}}</option>
                                                 {{/each}}
                                             </select>
                                         </div>
                                         
-                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                        <button type="submit" id="submit" disabled class="btn btn-primary">Submit</button>
                                         <button type="reset" class="btn btn-success">Reset</button>
                                     </form>
                                 </div>
@@ -47,6 +47,23 @@
                         </div>
 
 <script>
+
+    const validation = () =>{
+        const name = document.getElementById('name').value;
+        const price = document.getElementById('price').value;
+        const quantity = document.getElementById('quantity').value;
+        const released = document.getElementById('released').value;
+        const name = document.getElementById('name').value;
+
+        const submit = document.getElementById('submit');
+
+        if(!name || name.trim().length() ==0){
+            submit.disabled = true;
+        }else  {
+            submit.disabled = false;
+        }
+    }
+
     const onChangeFile = () => {
         const file = document.getElementById('image-file').files[0];
         const reader = new FileReader();

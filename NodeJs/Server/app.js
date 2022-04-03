@@ -5,6 +5,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+const session =require('express-session')
+
 const mongoose = require('mongoose');
 require('./components/users/model');
 require('./components/categories/model');
@@ -13,6 +15,7 @@ require('./components/products/model');
 // khai bao router
 var indexRouter = require('./routes/index');
 var productRouter = require('./routes/product');
+var apitRouter = require('./routes/api');
 
 var app = express();
 
@@ -25,6 +28,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(session({
+  secret: 'myKey',
+  resave: true,
+  saveUninitialized:true,
+  cookie:{secure:false}
+}))
 
 
 mongoose.connect('mongodb+srv://admin:123@cluster0.gtvhv.mongodb.net/Products16302?retryWrites=true&w=majority', {  
@@ -39,6 +49,7 @@ mongoose.connect('mongodb+srv://admin:123@cluster0.gtvhv.mongodb.net/Products163
 //import các router
 app.use('/', indexRouter);
 app.use('/san-pham',productRouter);
+app.use('/api',apitRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

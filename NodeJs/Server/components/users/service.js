@@ -20,6 +20,13 @@ exports.login = async(email) =>{
 
 
 
+exports.register = async (email,password) => {
+    const user = new userModel({email: email, password: password})
+    return await user.save()
+}
+
+
+
 
 
 
