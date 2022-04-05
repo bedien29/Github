@@ -38,8 +38,8 @@
                             </ul>
                         </li>
                         <li><a href="#"> TABS & PANELS</a></li>
-                        <li><a href="/san-pham" class="menu-top-active">PRODUCTS</a></li>
-                        <li><a href="/danh-muc">CATEGORY</a></li>
+                        <li><a href="/san-pham">PRODUCTS</a></li>
+                        <li><a href="/danh-muc" class="menu-top-active">CATEGORY</a></li>
 
                     </ul>
                 </div>
@@ -50,70 +50,62 @@
 </section>
 <!-- MENU SECTION END-->
 
- <div class="col-md-12">
-                <h4 class="header-line">Thông tin sản phẩm</h4>
+<div class="col-md-12">
+    <h4 class="header-line">Thêm mới sản phẩm</h4>
 
-            </div>
+</div>
 
 <div class="panel-body">
     <div class="row">
         <div class="col-lg-6">
-            <form role="form" action="/san-pham/{{product._id}}/edit"
-                              method="post" enctype="multipart/form-data">
+            <form role="form" action="/danh-muc" method="post" enctype="form-data">
                 <div class="form-group">
                     <label>Name</label>
-                    <input class="form-control" value="{{product.name}}" type=" text" name="name">
-                    {{!-- <p class="help-block">Example block-level help text here.</p> --}}
-                </div>
-                <div class="form-group">
-                    <label>Price</label>
-                    <input class="form-control" value="{{product.price}}" type=" number" name="price">
-                </div>
-                <div class="form-group">
-                    <label>Quantity</label>
-                    <input class="form-control" value="{{product.quantity}}" type=" number" name="quantity">
-                </div>
-                <div class="form-group">
-                    <label>Released</label>
-                    <input class="form-control" type="date" name="released" value="{{product.released}}">
-                </div>
-                <div class="form-group">
-                    <label>Image</label>
-                    <input type="file" name="image" id="image-file" onchange="onChangeFile()">
-                    <img src="{{product.image}}" width="200" height="200" id="image-view"
-                    style="object-fit: cover;">
+                    <input class="form-control" onChange="validation()" type="text" id="name" name="name">
                 </div>
                 <div class="form-group">
                     <label>Description</label>
-                    <textarea class="form-control" rows="3" name="description">{{product.description}}</textarea>
+                    <textarea class="form-control" onChange="validation()" rows="3" id="description"
+                        name="description"></textarea>
                 </div>
-                <div class="form-group">
-                    <label>Category</label>
-                    <select class="form-control" name="category_id">
-                        {{#each categories}}
-                        <option value="{{this._id}}">{{this.name}}</option>
-                        {{/each}}
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button id="submit" type="submit" class="btn btn-primary">Submit</button>
                 <button type="reset" class="btn btn-success">Reset</button>
             </form>
         </div>
+        </form>
     </div>
 </div>
-<!---->
+
 <section class="footer-section">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 &copy; 19xx 26-03-2022 |<a href="#" target="_blank"> Designed by :
-                        phamdien9xx@gmail.com</a>
+                    phamdien9xx@gmail.com</a>
             </div>
 
         </div>
     </div>
 </section>
+
 <script>
+
+    const validation = () => {
+        const name = document.getElementById('name').value;
+        const price = document.getElementById('price').value;
+        const quantity = document.getElementById('quantity').value;
+        const released = document.getElementById('released').value;
+        const name = document.getElementById('name').value;
+
+        const submit = document.getElementById('submit');
+
+        if (!name || name.trim().length() == 0) {
+            submit.disabled = true;
+        } else {
+            submit.disabled = false;
+        }
+    }
+
     const onChangeFile = () => {
         const file = document.getElementById('image-file').files[0];
         const reader = new FileReader();

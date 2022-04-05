@@ -16,6 +16,7 @@ require('./components/products/model');
 var indexRouter = require('./routes/index');
 var productRouter = require('./routes/product');
 var apitRouter = require('./routes/api');
+var categoryRouter = require('./routes/category');
 
 var app = express();
 
@@ -50,6 +51,7 @@ mongoose.connect('mongodb+srv://admin:123@cluster0.gtvhv.mongodb.net/Products163
 app.use('/', indexRouter);
 app.use('/san-pham',productRouter);
 app.use('/api',apitRouter);
+app.use('/danh-muc',categoryRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

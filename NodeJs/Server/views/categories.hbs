@@ -6,7 +6,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="#">
 
                 <img src="images/logo.png" />
             </a>
@@ -38,8 +38,8 @@
                             </ul>
                         </li>
                         <li><a href="#"> TABS & PANELS</a></li>
-                        <li><a href="/san-pham" class="menu-top-active">PRODUCTS</a></li>
-                        <li><a href="/danh-muc">CATEGORY</a></li>
+                        <li><a href="/san-pham">PRODUCTS</a></li>
+                        <li><a href="/danh-muc" class="menu-top-active">CATEGORY</a></li>
 
                     </ul>
                 </div>
@@ -53,12 +53,12 @@
     <div class="container">
         <div class="row pad-botm">
             <div class="col-md-12">
-                <h4 class="header-line">DANH SÁCH SẢN PHẨM</h4>
+                <h4 class="header-line">DANH SÁCH DANH MUC</h4>
 
             </div>
 
             <div class="right-div">
-                <a href="san-pham/insert" class="btn btn-info pull-right">Add Product</a>
+                <a href="danh-muc/insert" class="btn btn-info pull-right">Add Category</a>
             </div>
 
         </div>
@@ -76,27 +76,19 @@
                                     <tr>
                                         {{!-- <th>#</th>
                                         <th>ID</th> --}}
+                                        <th>#</th>
+                                        <th>ID</th>
                                         <th>Name</th>
-                                        <th>Price</th>
-                                        <th>Quantity</th>
-                                        <th>Image</th>
-                                        <th>Category</th>
-                                        <th>Released</th>
                                         <th>Description</th>
-                                        <th>Action</th>
+                                        
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {{#each products}}
+                                    {{#each categories}}
                                     <tr>
-                                        {{!-- <td></td>
-                                        <td>{{this._id}}</td> --}}
+                                        <td></td>
+                                        <td>{{this._id}}</td>
                                         <td>{{this.name}}</td>
-                                        <td>{{this.price}}</td>
-                                        <td>{{this.quantity}}</td>
-                                        <td><img src="{{this.image}}" width="100" height="100"></td>
-                                        <td>{{this.category_id.name}}</td>
-                                        <td>{{this.released}}</td>
                                         <td>{{this.description}}</td>
                                         <td>
                                             <button onclick="goEdit('{{this._id}}')" class="btn btn-link">Edit</button>
@@ -117,55 +109,6 @@
         </div>
         <!-- /. ROW  -->
         <div class="row">
-            <div class="col-md-6">
-                <!--    Hover Rows  -->
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Hover Rows
-                    </div>
-                    <div class="panel-body">
-                        <div class="table-responsive">
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>First Name</th>
-                                        <th>Last Name</th>
-                                        <th>Username</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Larry</td>
-                                        <td>the Bird</td>
-                                        <td>@twitter</td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>Larry</td>
-                                        <td>the Bird</td>
-                                        <td>@twitter</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <!-- End  Hover Rows  -->
-            </div>
             <div class="col-md-6">
                 <!--    Context Classes  -->
                 <div class="panel panel-default">
@@ -260,7 +203,7 @@
 
     //show sản phẩm the id
     const goEdit = (id) => {
-        window.location.href = `/san-pham/${id}/edit/`
+        window.location.href = `/danh-muc/${id}/edit/`
     }
     //Xóa sản phẩm theo id
     let deleted_id;
@@ -275,14 +218,14 @@
     }
 
     const onDelete = async () => {
-        const url = `http://localhost:3000/san-pham/${deleted_id}/delete`;
+        const url = `http://localhost:3000/danh-muc/${deleted_id}/delete`;
         const option = {
             method: 'delete',
             headers: { 'Content-Type': 'application/json' }
         }
         try {
             await fetchAPI(url, option);
-            window.location.href = '/san-pham';
+            window.location.href = '/danh-muc';
         } catch (e) { console.log('Delete error: ', e) }
     }
 

@@ -10,7 +10,26 @@ exports.getCategories = async() =>{
      */
     return await categoryModel.find();
 }
+exports.getById = async (id) => {
+    // const product = data.filter(item => item._id == id)[0];
+    // return product;
+    const category = await categoryModel.findById(id);
+    return category;
+}
 
+exports.insert = async (category) => {
+    const p = new categoryModel(category);
+    await p.save();
+}
+
+exports.delete = async (id) => {
+    // data = data.filter(item => item._id != id);
+    await categoryModel.findByIdAndDelete(id);
+}
+
+exports.update = async (id, category) => {
+    await categoryModel.findByIdAndUpdate(id, category);
+}
 
 
 
