@@ -30,7 +30,7 @@ router.post('/', [upload.single('image'),signup.checkLogin], async function (req
   let { params, body, file } = req;
   let image = '';
   if (file) {
-    image = `http://10.82.134.48:3000/images/${file.filename}`;
+    image = `http://192.168.43.164:3000/images/${file.filename}`;
   }
 
   body = { ...body, image };
@@ -91,7 +91,7 @@ router.post('/:id/edit', [upload.single('image'),signup.checkLogin], async funct
   delete body.image;
 
   if (file) {
-    image = `http://10.82.134.48:3000/images/${file.filename}`;
+    image = `http://192.168.43.164:3000/images/${file.filename}`;
     body = { ...body, image };
   }
  

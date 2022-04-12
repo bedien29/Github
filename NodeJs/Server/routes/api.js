@@ -34,7 +34,8 @@ router.post('/login', async function (req, res, next) {
   
   const { email, password } = req.body;
  
-  const result = await userController.login(email, password)
+  const result = await userController.login(email, password);
+  
  
   if (result) {
     const token = jwt.sign({ _id: result._id, email: result.email }, 'myKey');
@@ -53,11 +54,21 @@ router.post('/login', async function (req, res, next) {
  * author:
  * date:
  */
-router.get('/products',[], async function (req, res, next) {
+router.get('/products',[signup.checkToken], async function (req, res, next) {
   //lay danh sach san pham
   const products = await productController.getProducts();
-  console.log(products),
+  console.log(products);
+
   res.json(products);
 });
+
+router.get('/products/:id/detail',[signup.checkToken], async function (req, res, next) {
+
+  const {id} = req.params;
+  //lay danh sach san pham
+  const product = await productController.getById(id);
+  res.json(product);
+});
+
 
 module.exports = router;

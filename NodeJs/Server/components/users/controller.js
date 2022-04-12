@@ -9,7 +9,9 @@ exports.login =async(email,password) =>{
     //      return user;
     //  }
     //  return null;
+    console.log(user,email,password);
     const checkPassword= await bcrypt.compare(password, user.password);
+    console.log(checkPassword);
     if (!checkPassword) {
         return null;
     }
