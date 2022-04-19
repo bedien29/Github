@@ -15,7 +15,6 @@ detail: get list products
 router.get('/', [authentication.checkLogin], async function (req, res, next) {
   // lấy danh sách sản phẩm
   const categories = await categoryController.getCategories();
-  console.log('############################################### get / routes');
   res.render('categories', { categories: categories });
 });
 
@@ -31,7 +30,6 @@ router.post('/', [authentication.checkLogin], async function (req, res, next) {
   let { body } = req;
   body = { ...body };
   await categoryController.insert(body);
-  console.log('############################################### post / routes categories');
   res.redirect('/danh-muc');
 });
 

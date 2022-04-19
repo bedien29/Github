@@ -3,6 +3,7 @@ var router = express.Router();
 
 const userController = require('../components/users/controller');
 const productController = require('../components/products/controller');
+const iphoneController = require('../components/iphones/controller');
 const jwt = require('jsonwebtoken');
 const signup = require('../middle/signup');
 
@@ -68,6 +69,14 @@ router.get('/products/:id/detail',[signup.checkToken], async function (req, res,
   //lay danh sach san pham
   const product = await productController.getById(id);
   res.json(product);
+});
+
+router.get('/iphones',[signup.checkToken], async function (req, res, next) {
+  //lay danh sach san pham
+  const iphones = await iphoneController.getIphones();
+  console.log(iphones);
+
+  res.json(iphones);
 });
 
 

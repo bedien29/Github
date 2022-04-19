@@ -11,12 +11,14 @@ const mongoose = require('mongoose');
 require('./components/users/model');
 require('./components/categories/model');
 require('./components/products/model');
+require('./components/iphones/model');
 
 // khai bao router
 var indexRouter = require('./routes/index');
 var productRouter = require('./routes/product');
 var apitRouter = require('./routes/api');
 var categoryRouter = require('./routes/category');
+var iphoneRouter = require('./routes/iphone');
 
 var app = express();
 
@@ -52,6 +54,7 @@ app.use('/', indexRouter);
 app.use('/san-pham',productRouter);
 app.use('/api',apitRouter);
 app.use('/danh-muc',categoryRouter);
+app.use('/iphone',iphoneRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
